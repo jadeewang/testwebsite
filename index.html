@@ -8,15 +8,62 @@
 </head>
 <body>
 
-    <h1>About Jade</h1>
-    
-    <img src="your_image_url" alt="Jade's Image" style="width: 200px; border-radius: 50%;">
-    
-    <p>Hello, I'm Jade. My favorite color is brown, a warm and earthy hue that resonates with me. I take pride in my Chinese heritage, cherishing the rich culture and traditions that shape my identity.</p>
+    <h2>Welcome to</h2>
+    <h1> Jade's Time in SF</h1>
 
-    <p>Whether it's celebrating festivals, enjoying traditional cuisine, or embracing the beauty of the Chinese language, I find joy in the diversity that my heritage brings to my life.</p>
+    <button id="eatsbutton" type="button">Eats!</button>
+    <img id="foodImage" src="food1.HEIC">
+    <button id="friendsbutton" type="button">Friends!</button>
+    <img id="friendImage" src="friend1.HEIC">
+    <button id="viewsbutton" type="button">Views!</button>
+    <img id="viewsImage" src="nature1.HEIC">
+    
+    <script>
+    let foodbutton= document.getElementById("eatsbutton")
+    let friendbutton= document.getElementById("friendsbutton")
+    let viewsbutton= document.getElementById("viewsbutton")
 
-    <p>This webpage is a glimpse into my world, reflecting the colors of my personality and the roots that ground me. Thank you for taking the time to learn a little more about me!</p>
+    const foodlist= ["food1.HEIC", "food2.HEIC", "food3.HEIC"]
+    const friendlist= ["friend1.HEIC", "friend2.HEIC", "friend3.HEIC", "friend4.HEIC"]
+    const naturelist= ["nature1.HEIC", "nature2.HEIC", "nature3.HEIC", "nature4.HEIC"]
+    var curfood = 0;
+
+    function foodNext() {
+        curfood += 1;
+    
+        //loop back to the first image
+        if(curfood >= foodlist.length) {
+            curfood = 0;
+        }
+        document.getElementById("foodImage").src = foodlist[curfood];}
+    var curfriend = 0;
+
+    function friendNext() {
+        curfriend += 1;
+    
+        //loop back to the first image
+        if(curfriend >= friendlist.length) {
+            curfriend = 0;
+        }
+        document.getElementById("friendImage").src = friendlist[curfriend];}
+    var curviews = 0;
+
+    function viewsNext() {
+        curviews += 1;
+
+        //loop back to the first image
+        if(curviews >= naturelist.length) {
+            curviews = 0;
+        }
+        document.getElementById("viewsImage").src = naturelist[curviews];}
+    foodbutton.addEventListener("click",foodNext)
+    friendbutton.addEventListener("click",friendNext)
+    viewsbutton.addEventListener("click",viewsNext)
+
+</script>
 
 </body>
 </html>
+
+    document.getElementById("mainImage").src = images[currentImage];
+}
