@@ -10,66 +10,99 @@
 
     <h2>Welcome to</h2>
     <h1> Jade's Time in SF</h1>
-    <div class="content-container">
-        <div class="button-container">
-            <button id="eatsbutton" type="button">Eats!</button>
+    
+    <div class="galley-container">
+        <div class="content-container">
+            <div class="button-container">
+                <button id="eatsbutton" type="button">Eats!</button>
+            </div>
+            <div class="photo-container">
+                <img id="foodImage" src="food1.jpg" width="500" height="600">
+                <div class="caption">My favorite foods of the quarter</div>
+            </div>
         </div>
-        <img id="foodImage" src="food1.jpg" width="500" height="600">
+
+        <div class="content-container">
+            <div class="button-container">
+                <button id="friendsbutton" type="button">Friends!</button>
+            </div>
+            <div class="photo-container">
+                <img id="friendImage" src="friend1.jpg" width="500" height="600">
+                <div class="caption">Look at my awesome friends</div>
+            </div>
+        </div>
+
+        <div class="content-container">
+            <div class="button-container">
+                <button id="viewsbutton" type="button">Views!</button>
+            </div>
+            <div class="photo-container">
+                <img id="viewsImage" src="nature1.jpg" width="500" height="600">
+                <div class="caption">Best sights to see</div>
+            </div>
+        </div>
     </div>
 
-    <div class="content-container">
-        <div class="button-container">
-            <button id="friendsbutton" type="button">Friends!</button>
-        </div>
-        <img id="friendImage" src="friend1.jpg" width="500" height="600">
-    </div>
-
-    <div class="content-container">
-        <div class="button-container">
-            <button id="viewsbutton" type="button">Views!</button>
-        </div>
-        <img id="viewsImage" src="nature1.jpg" width="500" height="600">
-    </div>
     <script>
-    let foodbutton= document.getElementById("eatsbutton")
-    let friendbutton= document.getElementById("friendsbutton")
-    let viewsbutton= document.getElementById("viewsbutton")
-
-    const foodlist= ["food1.jpg", "food2.jpg", "food3.jpg"]
-    const friendlist= ["friend1.jpg", "friend2.jpg", "friend3.jpg", "friend4.jpg"]
-    const naturelist= ["nature1.jpg", "nature2.jpg", "nature3.jpg", "nature4.jpg"]
-    var curfood = 0;
-
-    function foodNext() {
-        curfood += 1;
-    
-        if(curfood >= foodlist.length) {
-            curfood = 0;
+        let foodbutton = document.getElementById("eatsbutton");
+        let friendbutton = document.getElementById("friendsbutton");
+        let viewsbutton = document.getElementById("viewsbutton");
+        
+        const foodlist = ["food1.jpg", "food2.jpg", "food3.jpg"];
+        const friendlist = ["friend1.jpg", "friend2.jpg", "friend3.jpg", "friend4.jpg"];
+        const naturelist = ["nature1.jpg", "nature2.jpg", "nature3.jpg", "nature4.jpg"];
+        var curfood = 0;
+        var curfriend = 0;
+        var curviews = 0;
+        
+        function foodNext() {
+            curfood += 1;
+            if (curfood >= foodlist.length) {
+                curfood = 0;
+            }
+            document.getElementById("foodImage").src = foodlist[curfood];
         }
-        document.getElementById("foodImage").src = foodlist[curfood];}
-    var curfriend = 0;
-
-    function friendNext() {
-        curfriend += 1;
-    
-        if(curfriend >= friendlist.length) {
-            curfriend = 0;
+        
+        function friendNext() {
+            curfriend += 1;
+            if (curfriend >= friendlist.length) {
+                curfriend = 0;
+            }
+            document.getElementById("friendImage").src = friendlist[curfriend];
         }
-        document.getElementById("friendImage").src = friendlist[curfriend];}
-    var curviews = 0;
-
-    function viewsNext() {
-        curviews += 1;
-
-        if(curviews >= naturelist.length) {
-            curviews = 0;
+        
+        function viewsNext() {
+            curviews += 1;
+            if (curviews >= naturelist.length) {
+                curviews = 0;
+            }
+            document.getElementById("viewsImage").src = naturelist[curviews];
         }
-        document.getElementById("viewsImage").src = naturelist[curviews];}
-    foodbutton.addEventListener("click",foodNext)
-    friendbutton.addEventListener("click",friendNext)
-    viewsbutton.addEventListener("click",viewsNext)
-
-</script>
-
+        
+        let foodInterval = setInterval(foodNext, 3000);
+        let friendInterval = setInterval(friendNext, 3000);
+        let viewsInterval = setInterval(viewsNext, 3000);
+        
+        function pauseSlideshow() {
+            clearInterval(foodInterval);
+            clearInterval(friendInterval);
+            clearInterval(viewsInterval);
+        }
+        
+        function resumeSlideshow() {
+            foodInterval = setInterval(foodNext, 3000);
+            friendInterval = setInterval(friendNext, 3000);
+            viewsInterval = setInterval(viewsNext, 3000);
+        }
+        
+        foodbutton.addEventListener("click", foodNext);
+        friendbutton.addEventListener("click", friendNext);
+        viewsbutton.addEventListener("click", viewsNext);
+        
+        document.querySelectorAll('.photo-container').forEach(container => {
+            container.addEventListener('mouseenter', pauseSlideshow);
+            container.addEventListener('mouseleave', resumeSlideshow);
+        });
+    </script>    
 </body>
 </html>
